@@ -11,49 +11,58 @@ import random
 
 pygame.init()
 
+#including sounds
 crash_sound = pygame.mixer.Sound("Crash.wav")
-
 pygame.mixer.music.load("Jazz_in_Paris.mp3")
 
+#display dimensions
 display_width = 800
 display_height = 600
 
+#color schemes
 black = (0,0,0)
 white = (255,255,255)
-
 bright_red = (255,0,0)
 bright_green  = (0,255,0)
-
 red = (200,0,0)
 green  = (0,200,0)
-
 block_color = (53,115,255)
+
 
 car_width = 100
 
+#global variable pause
 pause = False
 
+#initiating display
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
+#game title
 pygame.display.set_caption('A bit Racey')
+
 
 clock = pygame.time.Clock()
 
-
+#including car image
 carImg = pygame.image.load('racecar.png')
 
+#gameIcon
 pygame.display.set_icon(carImg)
 
 
 def things_dodged(count):
+    #counts the number of blocks dodged
     font = pygame.font.SysFont(None, 25)
     text = font.render("Dodged: "+ str(count), True, black)
     gameDisplay.blit(text,(0,0))
 
+
 def things(thingx, thingy, thingw, thingh, color):
+    #blcok details
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
 
 def car(x,y):
+    #car display position
     gameDisplay.blit(carImg, (x,y))
 
 def text_objects(text,font):
@@ -211,11 +220,13 @@ def game_loop():
     global pause
     pygame.mixer.music.play(-1)
     
+    #initial car position when game starts
     x = (display_width * 0.45)
     y = (display_height * 0.7)
     
     x_change = 0
     
+    #block position parameters
     thing_startx = random.randrange(0, display_width)
     thing_starty = -600
     thing_speed = 7
